@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 #hostname=$(hostname -f)
-#hostname="cordis-test"
 
 hostname=`grep -E '^Hostname=*' /etc/zabbix/zabbix_agentd.conf | sed 's/^Hostname=//'`
 path_my_cnf="/var/lib/zabbix/"
@@ -11,13 +10,15 @@ get_mysqld_sockets() {
 }
 
 check_alive() {
-#	mysqladmin --defaults-extra-file=/etc/zabbix/.my.cnf -S ${1} ping >/dev/null 2>&1
 	mysqladmin --defaults-extra-file=${path_my_cnf}.my.cnf -S ${1} ping >/dev/null 2>&1
 	socket_alive=$?
 }
 
 send_to_zabbix() {
-	zabbix_sender -T -c /etc/zabbix/zabbix_agentd.conf -i "${1}" > /tmp/mm.zabbix_sender.log 2>&1
+#	zabbix_sender -T -c /etc/zabbix/zabbix_agentd.conf -i "${1}" > /tmp/mm.zabbix_sender.log 2>&1
+	date >> /tmp/mm.zabbix_sender.log
+	echo ${1} >> /tmp/mm.zabbix_sender.log
+	zabbix_sender -T -c /etc/zabbix/zabbix_agentd.conf -i "${1}" >> /tmp/mm.zabbix_sender.log 2>&1
 }
 
 format_data_out() {
@@ -100,6 +101,28 @@ update_extended_status() {
 	echo 1
 }
 
+update_extended_variables() {
+	timestamp=$(date +'%s')
+	rm -f /tmp/mm.extended_variables.dat
+
+	# DEBUG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	date >> /tmp/mm.extended_variables.dat.log
+
+	for socket in $(get_mysqld_sockets)
+	do
+		check_alive ${socket}
+		instance=$(echo $socket | cut -d'/' -f5 | grep -Eo 'mysql[-a-z]+')
+		mysql --defaults-extra-file=${path_my_cnf}.my.cnf -S ${socket} -e 'Show GLOBAL Variables' \
+			| tail -n+2 \
+			| awk "{if (\$2 != \"\") print \"${hostname} mm.mysql.\" \$1 \"[${instance}]\"\" ${timestamp} \" \$2}" \
+			| grep -i -f /etc/zabbix/zabbix_agentd.d/mm.var.items >> /tmp/mm.extended_variables.dat~
+	done
+
+	mv /tmp/mm.extended_variables.dat~ /tmp/mm.extended_variables.dat
+	send_to_zabbix /tmp/mm.extended_variables.dat
+	echo 1
+}
+
 update_replication_status() {
 	rm -f /tmp/mm.replication_status.dat
 	timestamp=$(date +'%s')
@@ -130,11 +153,12 @@ parse_args()
 		| discover_replicas \
 		| update_alive_instances \
 		| update_replication_status \
+		| update_extended_variables \
 		| update_extended_status )
 		  $1
 		  ;;
 		*)
-		  echo "usage: ${0} [-h] [discover_instances] [discover_replicas] [update_alive_instances] [update_replication_status] [update_extended_status]
+		  echo "usage: ${0} [-h] [discover_instances] [discover_replicas] [update_alive_instances] [update_replication_status] [update_extended_status] [update_extended_variables]
 		  
 optional arguments:
   -h, --help --usage show this help message and exit
@@ -142,7 +166,9 @@ optional arguments:
   discover_replicas return a list of all mysqld instances replications in zabbix discovery format
   update_alive_instances send list of mysqld instances statuses to zabbix
   update_replication_status send list of mysqld instances replicas statuses to zabbix
-  update_extended_status send output of 'show GLOBAL status' of each mysqld instance to zabbix"
+  update_extended_status send output of 'Show GLOBAL Status' of each mysqld instance to zabbix
+  update_extended_variables send output of 'Show GLOBAL Variables' of each mysqld instance to zabbix
+"
 		  ;;
 	esac
 }
