@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
 #hostname=$(hostname -f)
-hostname="cordis-test"
+#hostname="cordis-test"
+
+hostname=`grep -E '^Hostname=*' /etc/zabbix/zabbix_agentd.conf | sed 's/^Hostname=//'`
 path_my_cnf="/var/lib/zabbix/"
 
 get_mysqld_sockets() {
