@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
 
-hostname=$(hostname -f)
+#hostname=$(hostname -f)
+hostname="cordis-test"
+path_my_cnf="/var/lib/zabbix/"
 
 get_mysqld_sockets() {
 	ps uaxwww | grep -E 'mysqld.+--socket' | grep -Eo '[\/a-z-]+\.sock+'
 }
 
 check_alive() {
-	mysqladmin --defaults-extra-file=/etc/zabbix/.my.cnf -S ${1} ping >/dev/null 2>&1
+#	mysqladmin --defaults-extra-file=/etc/zabbix/.my.cnf -S ${1} ping >/dev/null 2>&1
+	mysqladmin --defaults-extra-file=${path_my_cnf}.my.cnf -S ${1} ping >/dev/null 2>&1
 	socket_alive=$?
 }
 
@@ -35,12 +38,13 @@ get_slave_data() {
 	socket=${1}
 	param=${2}
 	replica=${3:-main}
-	if [[ "${replica}" == main ]]
-	then
-		result=$(mysql --defaults-extra-file=/etc/zabbix/.my.cnf -S ${socket} -e"show all slaves status\G" | grep ${param} | cut -d':' -f2 )
-	else
-		result=$(mysql --defaults-extra-file=/etc/zabbix/.my.cnf -S ${socket} -e"show slave \"${replica}\" status\G" | grep ${param} | cut -d':' -f2 )
-	fi
+#	if [[ "${replica}" == main ]]
+#	then
+#		result=$(mysql --defaults-extra-file=${path_my_cnf}.my.cnf -S ${socket} -e"show all slaves status\G" | grep ${param} | cut -d':' -f2 )
+#	else
+#		result=$(mysql --defaults-extra-file=${path_my_cnf}.my.cnf -S ${socket} -e"show slave \"${replica}\" status\G" | grep ${param} | cut -d':' -f2 )
+		result=$(mysql --defaults-extra-file=${path_my_cnf}.my.cnf -S ${socket} -e"show slave status\G" | grep ${param} | cut -d':' -f2 )
+#	fi
 	echo ${result} | sed 's/Yes/0/;s/No/1/;s/Connecting/1/'
 }
 
@@ -83,10 +87,10 @@ update_extended_status() {
 	do
 		check_alive ${socket}
 		instance=$(echo $socket | cut -d'/' -f5 | grep -Eo 'mysql[-a-z]+')
-		mysql --defaults-extra-file=/etc/zabbix/.my.cnf -S ${socket} -e 'show GLOBAL status' \
+		mysql --defaults-extra-file=${path_my_cnf}.my.cnf -S ${socket} -e 'show GLOBAL status' \
 			| tail -n+2 \
 			| awk "{if (\$2 != \"\") print \"${hostname} mm.mysql.\" \$1 \"[${instance}]\"\" ${timestamp} \" \$2}" \
-			| grep -i -f /etc/zabbix/mm.items >> /tmp/mm.extended_status.dat~
+			| grep -i -f /etc/zabbix/zabbix_agentd.d/mm.items >> /tmp/mm.extended_status.dat~
 	done
 
 	mv /tmp/mm.extended_status.dat~ /tmp/mm.extended_status.dat
