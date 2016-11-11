@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.2</version>
-    <date>2016-11-11T17:32:08Z</date>
+    <date>2016-11-11T17:56:58Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -93,7 +93,7 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>mm.alive.instances</key>
-                    <delay>30</delay>
+                    <delay>20</delay>
                     <history>7</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -136,7 +136,7 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>mm.extended_status</key>
-                    <delay>30</delay>
+                    <delay>10</delay>
                     <history>7</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -179,7 +179,7 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>mm.extended_variables</key>
-                    <delay>30</delay>
+                    <delay>3600</delay>
                     <history>7</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -209,6 +209,9 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
+                            <name>Innodb Global Variables</name>
+                        </application>
+                        <application>
                             <name>MySQL</name>
                         </application>
                     </applications>
@@ -222,7 +225,7 @@
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>mm.replication_status</key>
-                    <delay>30</delay>
+                    <delay>20</delay>
                     <history>7</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -254,6 +257,12 @@
                         <application>
                             <name>Binlog</name>
                         </application>
+                        <application>
+                            <name>MySQL</name>
+                        </application>
+                        <application>
+                            <name>MySQL Replication</name>
+                        </application>
                     </applications>
                     <valuemap/>
                     <logtimefmt/>
@@ -266,7 +275,7 @@
                     <snmp_community/>
                     <snmp_oid/>
                     <key>mm.instances.discovery</key>
-                    <delay>20</delay>
+                    <delay>10</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
