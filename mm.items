@@ -47,6 +47,7 @@ Innodb_data_read
 Innodb_data_reads
 Innodb_data_writes
 Innodb_data_written
+Innodb_deadlocks
 Innodb_log_waits
 Innodb_lsn_current
 Innodb_lsn_flushed
@@ -152,6 +153,8 @@ Handler_read_rnd
 Handler_read_rnd_next
 Handler_update
 Handler_write
+Handler_commit
+Handler_rollback
 Max_used_connections
 Open_table_definitions
 Open_tables
@@ -198,11 +201,13 @@ Relay_Log_Pos
 Seconds_Behind_Master
 Slave_IO_Running
 Slave_SQL_Running
+Com_commit
 Com_select
 Com_insert
 Com_update
 Com_delete
 Com_replace
+Com_rollback
 Com_call_procedure
 Com_show_authors
 Com_show_binlog_events

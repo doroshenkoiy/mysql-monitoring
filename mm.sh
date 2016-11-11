@@ -15,9 +15,7 @@ check_alive() {
 }
 
 send_to_zabbix() {
-#	zabbix_sender -T -c /etc/zabbix/zabbix_agentd.conf -i "${1}" > /tmp/mm.zabbix_sender.log 2>&1
-	date >> /tmp/mm.zabbix_sender.log
-	echo ${1} >> /tmp/mm.zabbix_sender.log
+	echo `date` ${1} > /tmp/mm.zabbix_sender.log
 	zabbix_sender -T -c /etc/zabbix/zabbix_agentd.conf -i "${1}" >> /tmp/mm.zabbix_sender.log 2>&1
 }
 
@@ -104,9 +102,6 @@ update_extended_status() {
 update_extended_variables() {
 	timestamp=$(date +'%s')
 	rm -f /tmp/mm.extended_variables.dat
-
-	# DEBUG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	date >> /tmp/mm.extended_variables.dat.log
 
 	for socket in $(get_mysqld_sockets)
 	do
