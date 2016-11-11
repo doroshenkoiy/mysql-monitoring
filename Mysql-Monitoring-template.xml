@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
-    <version>3.0</version>
-    <date>2016-09-10T19:35:06Z</date>
+    <version>3.2</version>
+    <date>2016-11-11T17:32:08Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -88,12 +88,12 @@
             <items>
                 <item>
                     <name>Check instances alive</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>mm.alive.instances</key>
-                    <delay>90</delay>
+                    <delay>30</delay>
                     <history>7</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -131,12 +131,12 @@
                 </item>
                 <item>
                     <name>Extended status for all instances</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>mm.extended_status</key>
-                    <delay>90</delay>
+                    <delay>30</delay>
                     <history>7</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -164,18 +164,65 @@
                     <port/>
                     <description/>
                     <inventory_link>0</inventory_link>
-                    <applications/>
+                    <applications>
+                        <application>
+                            <name>MySQL</name>
+                        </application>
+                    </applications>
+                    <valuemap/>
+                    <logtimefmt/>
+                </item>
+                <item>
+                    <name>Extended variables for all instances</name>
+                    <type>7</type>
+                    <snmp_community/>
+                    <multiplier>0</multiplier>
+                    <snmp_oid/>
+                    <key>mm.extended_variables</key>
+                    <delay>30</delay>
+                    <history>7</history>
+                    <trends>365</trends>
+                    <status>0</status>
+                    <value_type>3</value_type>
+                    <allowed_hosts/>
+                    <units/>
+                    <delta>0</delta>
+                    <snmpv3_contextname/>
+                    <snmpv3_securityname/>
+                    <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                    <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                    <snmpv3_authpassphrase/>
+                    <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                    <snmpv3_privpassphrase/>
+                    <formula>1</formula>
+                    <delay_flex/>
+                    <params/>
+                    <ipmi_sensor/>
+                    <data_type>0</data_type>
+                    <authtype>0</authtype>
+                    <username/>
+                    <password/>
+                    <publickey/>
+                    <privatekey/>
+                    <port/>
+                    <description/>
+                    <inventory_link>0</inventory_link>
+                    <applications>
+                        <application>
+                            <name>MySQL</name>
+                        </application>
+                    </applications>
                     <valuemap/>
                     <logtimefmt/>
                 </item>
                 <item>
                     <name>Get slaves status</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <multiplier>0</multiplier>
                     <snmp_oid/>
                     <key>mm.replication_status</key>
-                    <delay>90</delay>
+                    <delay>30</delay>
                     <history>7</history>
                     <trends>365</trends>
                     <status>0</status>
@@ -219,7 +266,7 @@
                     <snmp_community/>
                     <snmp_oid/>
                     <key>mm.instances.discovery</key>
-                    <delay>180</delay>
+                    <delay>20</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -241,7 +288,14 @@
                     <filter>
                         <evaltype>0</evaltype>
                         <formula/>
-                        <conditions/>
+                        <conditions>
+                            <condition>
+                                <macro>{#INSTANCE}</macro>
+                                <value>.*</value>
+                                <operator>8</operator>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
                     </filter>
                     <lifetime>30</lifetime>
                     <description/>
@@ -297,7 +351,7 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>mm.mysql.Aborted_clients[{#INSTANCE}]</key>
-                            <delay>30</delay>
+                            <delay>0</delay>
                             <history>90</history>
                             <trends>365</trends>
                             <status>0</status>
@@ -328,6 +382,9 @@
                             <applications>
                                 <application>
                                     <name>Connections</name>
+                                </application>
+                                <application>
+                                    <name>MySQL</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -341,7 +398,7 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>mm.mysql.Aborted_connects[{#INSTANCE}]</key>
-                            <delay>30</delay>
+                            <delay>0</delay>
                             <history>90</history>
                             <trends>365</trends>
                             <status>0</status>
@@ -373,6 +430,9 @@
                                 <application>
                                     <name>Connections</name>
                                 </application>
+                                <application>
+                                    <name>MySQL</name>
+                                </application>
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
@@ -385,10 +445,10 @@
                             <multiplier>0</multiplier>
                             <snmp_oid/>
                             <key>mm.mysql.Access_denied_errors[{#INSTANCE}]</key>
-                            <delay>60</delay>
+                            <delay>0</delay>
                             <history>90</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -400,7 +460,7 @@
                             <snmpv3_authpassphrase/>
                             <snmpv3_privprotocol>0</snmpv3_privprotocol>
                             <snmpv3_privpassphrase/>
-                            <formula>0</formula>
+                            <formula>1</formula>
                             <delay_flex/>
                             <params/>
                             <ipmi_sensor/>
@@ -416,6 +476,9 @@
                             <applications>
                                 <application>
                                     <name>Connections</name>
+                                </application>
+                                <application>
+                                    <name>MySQL</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -477,7 +540,7 @@
                             <delay>60</delay>
                             <history>90</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -521,7 +584,7 @@
                             <delay>60</delay>
                             <history>90</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -565,7 +628,7 @@
                             <delay>60</delay>
                             <history>90</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -609,7 +672,7 @@
                             <delay>60</delay>
                             <history>90</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -653,7 +716,7 @@
                             <delay>60</delay>
                             <history>90</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>byte</units>
@@ -697,7 +760,7 @@
                             <delay>60</delay>
                             <history>90</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -741,7 +804,7 @@
                             <delay>600</delay>
                             <history>90</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>0</value_type>
                             <allowed_hosts>localhost</allowed_hosts>
                             <units/>
@@ -785,7 +848,7 @@
                             <delay>60</delay>
                             <history>90</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -829,7 +892,7 @@
                             <delay>60</delay>
                             <history>90</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -873,7 +936,7 @@
                             <delay>600</delay>
                             <history>90</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>0</value_type>
                             <allowed_hosts>localhost</allowed_hosts>
                             <units/>
@@ -917,7 +980,7 @@
                             <delay>60</delay>
                             <history>90</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -961,7 +1024,7 @@
                             <delay>60</delay>
                             <history>90</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>sync/s</units>
@@ -1005,7 +1068,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -1049,7 +1112,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -1093,7 +1156,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
                             <units>byte</units>
@@ -1137,7 +1200,7 @@
                             <delay>60</delay>
                             <history>90</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -1313,7 +1376,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -1357,7 +1420,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>0</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>1</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -1401,7 +1464,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -1445,7 +1508,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>0</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>1</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -1533,7 +1596,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>0</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>1</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -1577,7 +1640,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -1665,7 +1728,7 @@
                             <delay>60</delay>
                             <history>90</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -1797,7 +1860,7 @@
                             <delay>60</delay>
                             <history>90</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -1841,7 +1904,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>byte</units>
@@ -1885,7 +1948,7 @@
                             <delay>60</delay>
                             <history>90</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -1929,7 +1992,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -2061,7 +2124,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -2105,7 +2168,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>tick</units>
@@ -2149,7 +2212,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>fault/s</units>
@@ -2193,7 +2256,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>fault/s</units>
@@ -2237,7 +2300,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>tick</units>
@@ -2281,7 +2344,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>tick</units>
@@ -2316,13 +2379,57 @@
                             <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Com_call_proc</name>
+                            <name>Com_call_procedure</name>
                             <type>2</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>mm.mysql.Com_call_proc[{#INSTANCE}]</key>
-                            <delay>30</delay>
+                            <key>mm.mysql.Com_call_procedure[{#INSTANCE}]</key>
+                            <delay>0</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>1</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>MySQL Performance</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Com_commit</name>
+                            <type>2</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>mm.mysql.Com_commit[{#INSTANCE}]</key>
+                            <delay>0</delay>
                             <history>90</history>
                             <trends>365</trends>
                             <status>0</status>
@@ -2587,6 +2694,50 @@
                             <snmp_oid/>
                             <key>mm.mysql.Com_replace_select[{#INSTANCE}]</key>
                             <delay>30</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>1</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>MySQL Performance</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Com_rollback</name>
+                            <type>2</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>mm.mysql.Com_rollback[{#INSTANCE}]</key>
+                            <delay>0</delay>
                             <history>90</history>
                             <trends>365</trends>
                             <status>0</status>
@@ -3029,7 +3180,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>0</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>4</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -3161,7 +3312,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -3293,7 +3444,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>tick</units>
@@ -3321,6 +3472,50 @@
                             <applications>
                                 <application>
                                     <name>CPU</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Handler_commit</name>
+                            <type>2</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>mm.mysql.Handler_commit[{#INSTANCE}]</key>
+                            <delay>0</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>1</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>MySQL Performance</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -3680,6 +3875,50 @@
                             <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
+                            <name>Handler_rollback</name>
+                            <type>2</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>mm.mysql.Handler_rollback[{#INSTANCE}]</key>
+                            <delay>0</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>1</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>MySQL Performance</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes/>
+                        </item_prototype>
+                        <item_prototype>
                             <name>Handler_update</name>
                             <type>2</type>
                             <snmp_community/>
@@ -3777,7 +4016,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>0</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>1</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -3909,7 +4148,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>0</value_type>
                             <allowed_hosts/>
                             <units>%</units>
@@ -3956,7 +4195,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -4658,7 +4897,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>byte</units>
@@ -4702,7 +4941,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>s</units>
@@ -5116,6 +5355,56 @@
                             <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
+                            <name>Innodb Deadlocks</name>
+                            <type>2</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>mm.mysql.Innodb_deadlocks[{#INSTANCE}]</key>
+                            <delay>0</delay>
+                            <history>30</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>2</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>Innodb</name>
+                                </application>
+                                <application>
+                                    <name>Innodb Locking</name>
+                                </application>
+                                <application>
+                                    <name>MySQL</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes/>
+                        </item_prototype>
+                        <item_prototype>
                             <name>Innodb File Format</name>
                             <type>2</type>
                             <snmp_community/>
@@ -5125,7 +5414,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>0</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>1</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -5204,13 +5493,13 @@
                             <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Innodb Flush Log at Transaction Commit</name>
+                            <name>Variables.Innodb Flush Log at Transaction Commit</name>
                             <type>2</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>mm.mysql.Innodb_flush_log_at_trx_commit[{#INSTANCE}]</key>
-                            <delay>60</delay>
+                            <key>mm.mysql.innodb_flush_log_at_trx_commit[{#INSTANCE}]</key>
+                            <delay>0</delay>
                             <history>30</history>
                             <trends>365</trends>
                             <status>0</status>
@@ -5225,7 +5514,7 @@
                             <snmpv3_authpassphrase/>
                             <snmpv3_privprotocol>0</snmpv3_privprotocol>
                             <snmpv3_privpassphrase/>
-                            <formula>0</formula>
+                            <formula>1</formula>
                             <delay_flex/>
                             <params/>
                             <ipmi_sensor/>
@@ -5248,19 +5537,22 @@
                                 <application>
                                     <name>Innodb Log File</name>
                                 </application>
+                                <application>
+                                    <name>MySQL</name>
+                                </application>
                             </applications>
                             <valuemap/>
                             <logtimefmt/>
                             <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Innodb Force Recovery</name>
+                            <name>Variables.Innodb Force Recovery</name>
                             <type>2</type>
                             <snmp_community/>
                             <multiplier>0</multiplier>
                             <snmp_oid/>
-                            <key>mm.mysql.Innodb_force_recovery[{#INSTANCE}]</key>
-                            <delay>60</delay>
+                            <key>mm.mysql.innodb_force_recovery[{#INSTANCE}]</key>
+                            <delay>0</delay>
                             <history>30</history>
                             <trends>365</trends>
                             <status>0</status>
@@ -5275,7 +5567,7 @@
                             <snmpv3_authpassphrase/>
                             <snmpv3_privprotocol>0</snmpv3_privprotocol>
                             <snmpv3_privpassphrase/>
-                            <formula>0</formula>
+                            <formula>1</formula>
                             <delay_flex/>
                             <params/>
                             <ipmi_sensor/>
@@ -5291,6 +5583,9 @@
                             <applications>
                                 <application>
                                     <name>Innodb Global Variables</name>
+                                </application>
+                                <application>
+                                    <name>MySQL</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -5711,6 +6006,50 @@
                                 </application>
                                 <application>
                                     <name>Innodb Log File</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes/>
+                        </item_prototype>
+                        <item_prototype>
+                            <name>Variables.innodb_max_dirty_pages_pct</name>
+                            <type>2</type>
+                            <snmp_community/>
+                            <multiplier>0</multiplier>
+                            <snmp_oid/>
+                            <key>mm.mysql.innodb_max_dirty_pages_pct[{#INSTANCE}]</key>
+                            <delay>0</delay>
+                            <history>90</history>
+                            <trends>365</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <delta>0</delta>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <formula>1</formula>
+                            <delay_flex/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>Innodb Global Variables</name>
                                 </application>
                             </applications>
                             <valuemap/>
@@ -6182,7 +6521,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -6226,7 +6565,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -6411,7 +6750,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -6728,7 +7067,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -6775,7 +7114,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -6822,7 +7161,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>byte</units>
@@ -6869,7 +7208,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -6916,7 +7255,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -6963,7 +7302,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -7010,7 +7349,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>s</units>
@@ -7189,7 +7528,7 @@
                             <delay>60</delay>
                             <history>90</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -7497,7 +7836,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -7585,7 +7924,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>fault/s</units>
@@ -7761,7 +8100,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>fault/s</units>
@@ -7805,7 +8144,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -7849,7 +8188,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>90</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -7893,7 +8232,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -7937,7 +8276,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -8773,7 +9112,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -8817,7 +9156,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -8861,7 +9200,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -8905,7 +9244,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -9125,7 +9464,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -9477,7 +9816,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>tick</units>
@@ -9521,7 +9860,7 @@
                             <delay>30</delay>
                             <history>90</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -9741,7 +10080,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -10005,7 +10344,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>tick</units>
@@ -10093,7 +10432,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -10137,7 +10476,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -10181,7 +10520,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -10225,7 +10564,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -10269,7 +10608,7 @@
                             <delay>30</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -10313,7 +10652,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>365</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units>byte</units>
@@ -10357,7 +10696,7 @@
                             <delay>60</delay>
                             <history>30</history>
                             <trends>90</trends>
-                            <status>0</status>
+                            <status>1</status>
                             <value_type>3</value_type>
                             <allowed_hosts/>
                             <units/>
@@ -10395,7 +10734,11 @@
                     <trigger_prototypes>
                         <trigger_prototype>
                             <expression>{Template App Mysql Monitoring:mm.mysql.Innodb_buffer_pool_instances[{#INSTANCE}].last(0)}=1</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
                             <name>Innodb Buffer Pool Instances is too small</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
                             <url>http://dev.mysql.com/doc/refman/5.5/en/Innodb-parameters.html#sysvar_Innodb_buffer_pool_instances</url>
                             <status>1</status>
                             <priority>1</priority>
@@ -10403,77 +10746,121 @@
 Some rules are: Innodb Buffer Pool Instance should be at least 1 Gbyte in size.&#13;
 Innodb Buffer Pool Instances you can set equal to the number of cores of your machine.</description>
                             <type>0</type>
+                            <manual_close>0</manual_close>
                             <dependencies/>
+                            <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
                             <expression>{Template App Mysql Monitoring:mm.mysql.Deadlock_new[{#INSTANCE}].last(0)}&gt;0</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
                             <name>Innodb Deadlock detected</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
                             <url>http://dev.mysql.com/doc/refman/5.5/en/storage-engines.html#Innodb-deadlock-detection</url>
                             <status>0</status>
                             <priority>1</priority>
                             <description>You got an Innodb Deadlock. Please talk to your development department to fix this. Deadlocks are an application problem!</description>
                             <type>1</type>
+                            <manual_close>0</manual_close>
                             <dependencies/>
+                            <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template App Mysql Monitoring:mm.mysql.Innodb_flush_log_at_trx_commit[{#INSTANCE}].last(0)}&lt;&gt;1</expression>
+                            <expression>{Template App Mysql Monitoring:mm.mysql.innodb_flush_log_at_trx_commit[{#INSTANCE}].last(0)}&lt;&gt;1</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
                             <name>Innodb Flush Log at Transaction Commit</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
                             <url>http://dev.mysql.com/doc/refman/5.5/en/Innodb-parameters.html#sysvar_Innodb_flush_log_at_trx_commit</url>
                             <status>0</status>
                             <priority>2</priority>
                             <description>Innodb Flush Log at Transaction Commit is set to a values != 1. This can lead to a loss of commited transactions in case of a power failure.</description>
                             <type>0</type>
+                            <manual_close>0</manual_close>
                             <dependencies/>
+                            <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template App Mysql Monitoring:mm.mysql.Innodb_force_recovery[{#INSTANCE}].last(0)}&lt;&gt;0</expression>
+                            <expression>{Template App Mysql Monitoring:mm.mysql.innodb_force_recovery[{#INSTANCE}].last(0)}&lt;&gt;0</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
                             <name>Innodb Force Recovery is enabled</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
                             <url>http://dev.mysql.com/doc/refman/5.5/en/Innodb-parameters.html#sysvar_Innodb_force_recovery</url>
                             <status>0</status>
                             <priority>2</priority>
                             <description>Innodb Force Recovery is enabled. This mode should be used for data recovery purposes only. It prohibits writing to the data.</description>
                             <type>0</type>
+                            <manual_close>0</manual_close>
                             <dependencies/>
+                            <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
                             <expression>{Template App Mysql Monitoring:mm.mysql.ForeignKey_new[{#INSTANCE}].last(0)}&gt;0</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
                             <name>Innodb Foreign Key error detected</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
                             <url>http://dev.mysql.com/doc/refman/5.5/en/Innodb-foreign-key-constraints.html</url>
                             <status>0</status>
                             <priority>2</priority>
                             <description>You got an Innodb Foreign Key error. Please talk to your development department to fix this.</description>
                             <type>1</type>
+                            <manual_close>0</manual_close>
                             <dependencies/>
+                            <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
                             <expression>{Template App Mysql Monitoring:mm.mysql.Innodb_log_file_size[{#INSTANCE}].last(0)}&lt;16777216</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
                             <name>Innodb Log File size is too small</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
                             <url>http://dev.mysql.com/doc/refman/5.5/en/Innodb-parameters.html#sysvar_Innodb_log_file_size</url>
                             <status>0</status>
                             <priority>2</priority>
                             <description>The Innodb Log File size is possibly too small. Choosing a small Innodb Log File size can have significant performance impacts.</description>
                             <type>0</type>
+                            <manual_close>0</manual_close>
                             <dependencies/>
+                            <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
                             <expression>{Template App Mysql Monitoring:mm.mysql.ignore_builtin_Innodb[{#INSTANCE}].regexp(ON)}=1</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
                             <name>Innodb Plugin is enabled</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
                             <url>http://dev.mysql.com/doc/Innodb-plugin/1.0/en/Innodb-plugin-installation.html</url>
                             <status>0</status>
                             <priority>1</priority>
                             <description>Innodb Plugin is enabled</description>
                             <type>0</type>
+                            <manual_close>0</manual_close>
                             <dependencies/>
+                            <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
                             <expression>{Template App Mysql Monitoring:mm.instance.alive[{#INSTANCE}].last(0)}&lt;&gt;0 or {Template App Mysql Monitoring:mm.instance.alive[{#INSTANCE}].nodata(10m)}=1</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
                             <name>{#INSTANCE} instance down on {HOSTNAME}</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
                             <url/>
                             <status>0</status>
                             <priority>5</priority>
                             <description/>
                             <type>0</type>
+                            <manual_close>0</manual_close>
                             <dependencies/>
+                            <tags/>
                         </trigger_prototype>
                     </trigger_prototypes>
                     <graph_prototypes>
@@ -12592,7 +12979,7 @@ Innodb Buffer Pool Instances you can set equal to the number of cores of your ma
                                     <type>0</type>
                                     <item>
                                         <host>Template App Mysql Monitoring</host>
-                                        <key>mm.mysql.Com_call_proc[{#INSTANCE}]</key>
+                                        <key>mm.mysql.Com_call_procedure[{#INSTANCE}]</key>
                                     </item>
                                 </graph_item>
                             </graph_items>
@@ -13574,7 +13961,7 @@ Innodb Buffer Pool Instances you can set equal to the number of cores of your ma
                     <snmp_community/>
                     <snmp_oid/>
                     <key>mm.replicas.discovery</key>
-                    <delay>180</delay>
+                    <delay>20</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -13596,7 +13983,14 @@ Innodb Buffer Pool Instances you can set equal to the number of cores of your ma
                     <filter>
                         <evaltype>0</evaltype>
                         <formula/>
-                        <conditions/>
+                        <conditions>
+                            <condition>
+                                <macro>{#REPLICA}</macro>
+                                <value>.*</value>
+                                <operator>8</operator>
+                                <formulaid>A</formulaid>
+                            </condition>
+                        </conditions>
                     </filter>
                     <lifetime>30</lifetime>
                     <description/>
@@ -13736,24 +14130,36 @@ Innodb Buffer Pool Instances you can set equal to the number of cores of your ma
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template App Mysql Monitoring:mm.Slave_IO_Running[{#REPLICA}].last(#3)}&lt;&gt;0 or {Template App Mysql Monitoring:mm.Slave_SQL_Running[{#REPLICA}].last(#3)}&lt;&gt;0</expression>
-                            <name>{HOSTNAME} {#REPLICA} Replication stopped</name>
-                            <url/>
-                            <status>0</status>
-                            <priority>5</priority>
-                            <description/>
-                            <type>0</type>
-                            <dependencies/>
-                        </trigger_prototype>
-                        <trigger_prototype>
                             <expression>{Template App Mysql Monitoring:mm.Seconds_Behind_Master[{#REPLICA}].count(#5, 3600, &quot;ge&quot;)}&gt;3</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
                             <name>{HOSTNAME} {#REPLICA} Replication is lagging</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
                             <url/>
                             <status>0</status>
                             <priority>4</priority>
                             <description/>
                             <type>0</type>
+                            <manual_close>0</manual_close>
                             <dependencies/>
+                            <tags/>
+                        </trigger_prototype>
+                        <trigger_prototype>
+                            <expression>{Template App Mysql Monitoring:mm.Slave_IO_Running[{#REPLICA}].last(#3)}&lt;&gt;0 or {Template App Mysql Monitoring:mm.Slave_SQL_Running[{#REPLICA}].last(#3)}&lt;&gt;0</expression>
+                            <recovery_mode>0</recovery_mode>
+                            <recovery_expression/>
+                            <name>{HOSTNAME} {#REPLICA} Replication stopped</name>
+                            <correlation_mode>0</correlation_mode>
+                            <correlation_tag/>
+                            <url/>
+                            <status>0</status>
+                            <priority>5</priority>
+                            <description/>
+                            <type>0</type>
+                            <manual_close>0</manual_close>
+                            <dependencies/>
+                            <tags/>
                         </trigger_prototype>
                     </trigger_prototypes>
                     <graph_prototypes>
@@ -13793,6 +14199,7 @@ Innodb Buffer Pool Instances you can set equal to the number of cores of your ma
                     <host_prototypes/>
                 </discovery_rule>
             </discovery_rules>
+            <httptests/>
             <macros/>
             <templates/>
             <screens/>
