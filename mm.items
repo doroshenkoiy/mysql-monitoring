@@ -158,6 +158,7 @@ Handler_rollback
 Max_used_connections
 Open_table_definitions
 Open_tables
+Open_files
 Opened_files
 Opened_table_definitions
 Opened_tables
